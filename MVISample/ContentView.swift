@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var sampleAppRouter: SampleSceneRouter
+    
+    init() {
+        self._sampleAppRouter = StateObject(wrappedValue: SampleSceneRouter())
+    }
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $sampleAppRouter.path) {
+            SampleView.build(sceneAppRouter: self.sampleAppRouter)
         }
-        .padding()
+        
     }
 }
 
